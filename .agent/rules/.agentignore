@@ -1,0 +1,45 @@
+# Keeps secrets, build artefacts and heavy binaries out of the agent's context window.
+# This is a token-cost and hallucination-surface control, not housekeeping.
+
+# ── Secrets — never read, never quote ────────────────────────────────────────
+wp-config.php
+.env
+.env.*
+!.env.example
+
+# ── Dependencies and build output ────────────────────────────────────────────
+vendor/
+node_modules/
+*.min.js
+*.min.css
+
+# ── WordPress core (never edit; only plugin code under wp-content/plugins/** is ours) ──
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/cache/
+
+# ── Heavy or binary assets ───────────────────────────────────────────────────
+*.pdf
+*.docx
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.zip
+*.tar.gz
+
+# ── Lockfiles: huge, low information ─────────────────────────────────────────
+composer.lock
+package-lock.json
+
+# ── Logs and local scratch ───────────────────────────────────────────────────
+*.log
+.DS_Store
+tmp/
+
+# Note: the two real requirement/standard source documents for this project
+# (docs/INT SDD BluePrint - V1.0.pdf, docs/Requirement for SDD.docx) are intentionally checked
+# into the repo — see .ai-context/source-docs/README.md. The blanket *.pdf/*.docx rule above still
+# applies to agent auto-context so a stray download or export cannot silently enter it; read these
+# two deliberately, by path, when authoring a BRD entry or spec.
